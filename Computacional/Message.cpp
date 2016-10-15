@@ -1,5 +1,6 @@
 #include "Message.h"
 #include "Numbers.h"
+#include <random>
 
 Dictionary Message::Dic = Dictionary();
 
@@ -8,8 +9,12 @@ Message::Message(std::string mes, long long p, long long q)
 	message = mes;
 	this->p = p;
 	this->q = q;
-	n = p*q;
 	z = (q - 1)*(p - 1);
+	n = p*q;
+	generatePrivateKey();
+	generatePublicKey();
+	encryptMessage();
+	desencryptMessage();
 }
 
 Message::~Message()
@@ -66,16 +71,6 @@ bool Message::isInDictionary(char c)
 	return Dic.isInDictionary(c);
 }
 
-int Message::getDictionarySize()
-{
-	return Dic.getDictionarySize();
-}
-
-char Message::getChar(int position)
-{
-	return Dic.getChar(position);
-}
-
 int Message::getLowerLimit()
 {
 	return Dic.getLowerLimit();
@@ -118,5 +113,33 @@ void Message::generatePublicKey()
 
 void Message::generatePrivateKey()
 {
-
+	std::mt19937_64 rng;
+	rng.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937_64::result_type> dist(2, z - 1);
+	// distribution in range [2, z-1] since d < z && GCD(d,z)=1
+	do
+	{
+		d = dist(rng);
+	} while (Numbers::GCD(d, z) != 1);
 }
+
+void Message::encryptMessage()
+{
+	for (size_t i = 0; i < message.size(); ++i)
+	{
+		int m = static_cast<int>(message[i]);
+		char c = static_cast<char>(Numbers::ModularExponentiation(static_cast<long long>(m), e, n));
+		encryptedmessage.push_back(c);
+	}
+}
+
+void Message::desencryptMessage()
+{
+	for (size_t i = 0; i < encryptedmessage.size(); ++i)
+	{
+		int c = static_cast<int>(encryptedmessage[i]);
+		char m = static_cast<char>(Numbers::ModularExponentiation(static_cast<long long>(c), d, n));
+		desencryptedmessage.push_back(m);
+	}
+}
+

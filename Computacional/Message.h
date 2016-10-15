@@ -15,16 +15,18 @@ private:
 	std::string encryptedmessage;
 	std::string desencryptedmessage;
 
-	long long q;
 	long long p;
-	long long n;
+	long long q;
 	long long z;
+	long long n;
 
 	long long d;
 	long long e;
 
 	void generatePrivateKey();
 	void generatePublicKey();
+	void encryptMessage();
+	void desencryptMessage();
 
 public:
 	Message(std::string message, long long p, long long q);
@@ -34,10 +36,10 @@ public:
 	std::string getEncryptedMessage();
 	std::string getDesencryptedMessage();
 
-	long long getQ();
 	long long getP();
-	long long getN();
+	long long getQ();
 	long long getZ();
+	long long getN();
 	long long getD();
 	long long getE();
 
@@ -48,10 +50,9 @@ public:
 	void setZ(long long z);
 
 
+
 	//Delegation: Software Pattern Design
 	bool isInDictionary(char c);
-	int getDictionarySize();
-	char getChar(int position);
 	int getLowerLimit();
 	int getUpperLimit();
 };
