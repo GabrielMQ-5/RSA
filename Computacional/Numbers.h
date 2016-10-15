@@ -1,9 +1,10 @@
 #ifndef NUMBERS_H
 #define NUMBERS_H
 
-//For references in this header:
+//Read from here
 //Linear Congruence: ax = b mod n  
 //Inverse Modular: ax= 1 mod n
+//Modular Exponentiation: (a^b) % n
 //GCD(a,b)
 
 namespace Numbers
@@ -28,6 +29,9 @@ namespace Numbers
 
 	template<typename T>
 	T Inverse3(T a, T n2, T n);
+
+	template<typename T>
+	T ModularExponentiation(T a, T b, T n);
 };
 #endif
 
@@ -104,4 +108,22 @@ T Numbers::Inverse3(T a, T n2, T n)
 	T p = Inverse3(a, n2 / 2, n) % n;
 	p = (p * p) % n;
 	return (n2 % 2 == 0) ? p : (a * p) % n;
+}
+
+template<typename T>
+T Numbers::ModularExponentiation(T a, T b, T n)
+{
+	T res = 1;
+
+	a = a % n;
+
+	while (b > 0)
+	{
+		if (b & 1)
+			res = (res*a) % n;
+
+		b >>= 1;
+		a = (a*a) % n;
+	}
+	return res;
 }
