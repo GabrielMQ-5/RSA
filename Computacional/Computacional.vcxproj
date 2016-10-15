@@ -69,14 +69,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Diccionario.h" />
-    <ClInclude Include="Mensaje.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Message.h" />
     <ClInclude Include="Numbers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Diccionario.cpp" />
-    <ClCompile Include="Mensaje.cpp" />
-    <ClCompile Include="Numbers.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="Message.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,19 +1,19 @@
-#pragma once
+#ifndef MESSAGE_H
+#define MESSAGE_H
+
 #include <string>
 #include <vector>
-#include "Diccionario.h"
+#include "Dictionary.h"
 
-using namespace std;
-
-class Mensaje
+class Message
 {
 private:
-	static Diccionario Dic;
+	static Dictionary Dic;
 
-	string message;
+	std::string message;
 
-	string encryptedmessage;
-	string desencryptedmessage;
+	std::string encryptedmessage;
+	std::string desencryptedmessage;
 
 	long long q;
 	long long p;
@@ -27,12 +27,12 @@ private:
 	void generatePublicKey();
 
 public:
-	Mensaje(string message, long long p, long long q);
-	~Mensaje();
+	Message(std::string message, long long p, long long q);
+	~Message();
 
-	string getMessage();
-	string getEncryptedMessage();
-	string getDesencryptedMessage();
+	std::string getMessage();
+	std::string getEncryptedMessage();
+	std::string getDesencryptedMessage();
 
 	long long getQ();
 	long long getP();
@@ -41,7 +41,7 @@ public:
 	long long getD();
 	long long getE();
 
-	void setMessage(string message);
+	void setMessage(std::string message);
 	void setQ(long long q);
 	void setP(long long p);
 	void setN(long long n);
@@ -55,4 +55,4 @@ public:
 	int getLowerLimit();
 	int getUpperLimit();
 };
-
+#endif

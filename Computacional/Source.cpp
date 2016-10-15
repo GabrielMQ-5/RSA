@@ -1,11 +1,7 @@
 #include <iostream>
-#include "Mensaje.h"
-#include "Numbers.h"
 
-using namespace std;
-
-int main()
+int main(array<System::String ^> ^args)
 {
-	
-	system("pause");
+	//Work to be done here
+	return 0;
 }
